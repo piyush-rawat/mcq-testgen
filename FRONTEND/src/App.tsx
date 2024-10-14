@@ -5,16 +5,14 @@ import { SnackbarProvider } from "notistack";
 import LoginPage from "./pages/LoginPage";
 import DashboardPage from "./pages/DashboardPage";
 import Navbar from "./components/Navbar";
-import { useAuthStore } from "./store";
 
 import "./App.css";
 import CreateTestPage from "./pages/CreateTestPage";
 import TestPage from "./pages/TestPage";
 import ResultsPage from "./pages/ResultsPage";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
-  const { access_token } = useAuthStore();
-
   return (
     <SnackbarProvider>
       <GoogleOAuthProvider clientId="622136685107-017damgo50vqk4btgaqt4a577sth4hls.apps.googleusercontent.com">
@@ -23,11 +21,20 @@ const App = () => {
           <Routes>
             <Route
               path="/"
-              element={access_token ? <DashboardPage /> : <LoginPage />}
+              element={<PrivateRoute element={<DashboardPage />} />}
             />
-            <Route path="/create" element={<CreateTestPage />} />
-            <Route path="/test/:slug" element={<TestPage />} />
-            <Route path="/result/:slug" element={<ResultsPage />} />
+            <Route
+              path="/create"
+              element={<PrivateRoute element={<CreateTestPage />} />}
+            />
+            <Route
+              path="/test/:slug"
+              element={<PrivateRoute element={<TestPage />} />}
+            />
+            <Route
+              path="/result/:slug"
+              element={<PrivateRoute element={<ResultsPage />} />}
+            />
             <Route path="/login" element={<LoginPage />} />
           </Routes>
         </Router>
