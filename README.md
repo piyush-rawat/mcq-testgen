@@ -17,7 +17,7 @@ Welcome to the MCQ TestGen. This application allows users to create, share, and 
 
 ## Demo
 
-[https://](#)
+[https://mcq-testgen.onrender.com](https://mcq-testgen.onrender.com)
 
 ## Installation
 
@@ -37,9 +37,16 @@ cd mcq-testgen
 
 Create a .env file: In the root directory of your project, create a file named .env. This file will hold your environment variables.
 
+- NODE_ENV : `development` or `production`
+- PORT : `5001`
+- MONGODB_URI: `Your MongoDB URI`
+- JWT_SECRET: run this command in terminal to generate `openssl rand -hex 32`
+
 ```bash
+NODE_ENV=
 PORT=
 MONGODB_URI=
+JWT_SECRET=
 ```
 
 Install the dependencies
