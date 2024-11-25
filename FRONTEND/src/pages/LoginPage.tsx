@@ -1,10 +1,12 @@
 import { authenticateGoogleToken } from "@/network/authRequests";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
-
+import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store";
 
 const LoginPage = () => {
   const { setUser, setToken } = useAuthStore();
+
+  const navigate = useNavigate();
 
   const handleOnSuccess = (credentialResponse: CredentialResponse) => {
     authenticateGoogleToken(credentialResponse.credential).then((res: any) => {
@@ -12,6 +14,7 @@ const LoginPage = () => {
         const { user, access_token } = res;
         setUser(user);
         setToken(access_token);
+        navigate("/");
       } else {
         console.log("Authentication failed");
       }
